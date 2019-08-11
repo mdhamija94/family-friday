@@ -30,10 +30,9 @@ def group_builder(num_participants)
     Array.new(num_groups) { Array.new }
 end
 
-puts "Participant Count: #{apartment_list.length}"
-
 groups = fam_fri(apartment_list)
 
+puts "Participant Count: #{apartment_list.length}"
 groups.each_with_index do |group, i|
     puts "Group #{i + 1}: #{group}"
 end
