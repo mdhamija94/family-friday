@@ -1,31 +1,30 @@
-people = File.readlines("apartment_list.txt").map(&:chomp)
-apartment_list = Array.new(people)
+apartment_list = File.readlines("apartment_list.txt").map(&:chomp)
 
-def fam_fri(people)
-    groups = group_builder(people)
+def fam_fri(participants)
+    groups = group_builder(participants.length)
 
-    people.shuffle!
+    participants.shuffle!
 
     groups.each do |group|
-        group << people.pop until group.size == 3 || people.empty?
+        group << participants.pop until group.size == 3 || participants.empty?
     end
 
-    unless people.empty?
+    unless participants.empty?
         groups.each do |group|
-            group << people.pop until group.length == 4 || people.empty?
+            group << participants.pop until group.length == 4 || participants.empty?
         end
     end
 
     groups
 end
 
-def group_builder(people)
+def group_builder(num_participants)
     num_groups = 0
     
-    if people.length % 4 == 0
-        num_groups = people.length / 4
+    if num_participants % 4 == 0
+        num_groups = num_participants / 4
     else
-        num_groups = (people.length / 4) + 1
+        num_groups = (num_participants / 4) + 1
     end
 
     Array.new(num_groups) { Array.new }
